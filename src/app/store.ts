@@ -13,7 +13,7 @@ import {
 } from "redux-persist";
 
 import storage from "redux-persist/lib/storage";
-import {   } from "./services";
+import { weatherApi } from "./services";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { loadState } from "./localStorage";
 import rootReducer, { RootState } from "./rootReducer";
@@ -37,13 +37,7 @@ const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(
-      authApi.middleware,
-      refreshTokenApi.middleware,
-      campaignsApi.middleware,
-      productsApi.middleware,
-      audiencesApi.middleware,
-    ),
+    }).concat(weatherApi.middleware),
 });
 
 export const persistor = persistStore(store);

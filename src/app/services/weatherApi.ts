@@ -1,12 +1,12 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { prepareHeaders } from "../../utils";
+// import { prepareHeaders } from "../../utils";
 import { BASE_URL } from "../../constants";
 
-export const productsApi = createApi({
-  reducerPath: "productsApi",
+export const weatherApi = createApi({
+  reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
     baseUrl: BASE_URL,
-    prepareHeaders,
+    // prepareHeaders,
   }),
   tagTypes: ['products'],
   endpoints: (builder) => ({
@@ -29,4 +29,4 @@ export const productsApi = createApi({
   }),
 });
 
-export const { useGetProductsQuery, useAddProductMutation } = productsApi;
+export const { useGetProductsQuery, useAddProductMutation } = weatherApi;
