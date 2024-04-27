@@ -1,0 +1,1 @@
+export const BASE_URL = process.env.OPEN_WEATHER_APP_API_URL
