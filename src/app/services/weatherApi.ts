@@ -16,7 +16,15 @@ export const weatherApi = createApi({
       }),
       providesTags: ['weather']
     }),
+    getForecastReport: builder.query({
+      query: (params) => ({
+        url: "forecast",
+        method: "GET",
+        params
+      }),
+      providesTags: ['weather']
+    }),
   }),
 });
 
-export const { useGetCurrentWeatherReportQuery, useLazyGetCurrentWeatherReportQuery } = weatherApi;
+export const { useGetCurrentWeatherReportQuery, useGetForecastReportQuery, useLazyGetCurrentWeatherReportQuery } = weatherApi;
