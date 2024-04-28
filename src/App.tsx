@@ -1,16 +1,17 @@
 import React, { useState } from "react";
-import styles from "./app.module.scss";
+import "../src/scss/main.scss";
 import {
   useGetCurrentWeatherReportQuery,
   useGetForecastReportQuery,
   useLazyGetCurrentWeatherReportQuery,
 } from "./app/services";
-import SearchInput from "./components/Search";
+// import SearchInput from "./components/Search";
 import Weather from "./components/Weather";
 // import { API_KEY } from "./constants";
 // import { API_KEY } from "./constants";
 import useGeolocation from "./hooks/useGeolocation";
 import useDebounce from "./hooks/useDebounce";
+import Forecast from "./components/Forecast";
 
 function App() {
   const { coords } = useGeolocation();
@@ -44,8 +45,8 @@ function App() {
     isFetching: isForecastReportFetching,
   } = useGetForecastReportQuery(params);
 
-  console.log("Forecast", forecastReport)
-  console.log("Weather", weatherReport)
+  console.log("Forecast", forecastReport);
+  console.log("Weather", weatherReport);
 
   const debouncedSearch = useDebounce((searchTerm) => {
     // console.log("Fetching data for", searchTerm);
@@ -53,11 +54,11 @@ function App() {
   }, 1000);
 
   return (
-    <div className={styles.app_container}>
-      <div className={styles.search_container}>
+    <div className="app_container">
+      <div className="search_container">
         <input
           type="search"
-          className={styles.search}
+          className="search"
           placeholder="search by city here..."
           value={searchTerm}
           onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,30 +67,23 @@ function App() {
           }}
         />
       </div>
-      {isWeatherReportLoading || !weatherReport ? (
-        <div className={styles.loading_container}>
-          <div className={styles.loading_spinner} />
-          <p>Loading weather information </p>
-        </div>
-      ) : isWeatherReportFetching ? (
-        <div className={styles.loading_container}>
-          <div className={styles.loading_spinner} />
-          <p>
-            Fetching details for {weatherReport?.name},{" "}
-            {weatherReport?.sys?.country}
-          </p>
-        </div>
-      ) : isWeatherReporError ? (
-        <div className={styles.error_container}>
-          <p className={styles.error_message}>An error occured!</p>
+      {isWeatherReporError && !isWeatherReportLoading ? (
+        <div className="error_container">
+          <p className="error_message">An error occured!</p>
         </div>
       ) : isSearching ? (
-        <div className={styles.loading_container}>
+        <div className="loading_container">
           <p>Searching for weather report</p>
         </div>
       ) : (
-        <Weather data={searchTerm ? searchResults : weatherReport} />
+        <Weather loading={isWeatherReportLoading || isWeatherReportFetching} data={searchTerm ? searchResults : weatherReport} />
       )}
+
+      <div className="forecast_wrapper">
+        {forecastReport?.list?.map((item) => (
+          <Forecast />
+        ))}
+      </div>
     </div>
   );
 }

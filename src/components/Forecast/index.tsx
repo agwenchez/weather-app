@@ -1,8 +1,12 @@
-
-
+import styles from './forecat.module.scss'
+interface ForecastProps{
+    
+}
 const Forecast = () => {
   return (
-    <div>Forecast</div>
+    <div className="forecast_container">
+
+    </div>
   )
 }
 
