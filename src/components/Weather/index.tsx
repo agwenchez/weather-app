@@ -3,21 +3,21 @@ import "../../../src/scss/main.scss";
 import { MdLocationOn } from "react-icons/md";
 interface WeatherProps {
   data: any;
-  loading: boolean
+//   loading: boolean
 }
 
 const now = new Date();
-const Weather = ({ data, loading }: WeatherProps) => {
+const Weather = ({ data }: WeatherProps) => {
   //   console.log("Data", data);
   return (
     <div className="weather_container">
       {data && (
         <>
-          <div className={loading ? "loading" : "left_container"}>
-            <div className={loading ? "loading" : "weather_overview"}>
+          <div className={"left_container"}>
+            <div className="weather_overview">
               <img
                 alt="weather"
-                className={loading ? "loading" : "weather_icon"}
+                className="weather_icon"
                 color="white"
                 src={`icons/${data?.weather[0]?.icon}.png`}
               />
@@ -30,7 +30,7 @@ const Weather = ({ data, loading }: WeatherProps) => {
               <span className="feels_like_degrees">{"°C"}</span>
             </div>
           </div>
-          <div className={loading ? "loading" : "right_container"}>
+          <div className="right_container">
             <h4 className="name">
               <MdLocationOn /> {data?.name}, {data?.sys?.country}
             </h4>

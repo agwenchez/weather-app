@@ -1,0 +1,184 @@
+.current-weather-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    padding: $spacing-16 $spacing-20;
+    border: $line-weight solid $primary-color;
+    border-radius: $border-radius;
+    background-color: $tertiary-color;
+  
+    .current-weather-icon {
+      min-height: 96px;
+      min-width: 96px;
+      height: 96px;
+      width: 96px;
+      margin: $spacing-14 $spacing-16;
+    }
+  
+    .current-weather-temperature {
+      @include typography($font-size-36, $medium-500, $primary-color);
+      width: auto;
+      margin: $spacing-14 $spacing-16;
+    }
+  
+    .current-weather-description {
+      @include typography($font-size-16, $regular-400, $primary-color);
+      width: auto;
+      margin: $spacing-0 $spacing-16 $spacing-14 $spacing-16;
+    }
+  
+    .current-location-container {
+      display: flex;
+      align-items: center;
+      margin: $spacing-14 $spacing-16;
+  
+      svg {
+        min-height: 24px;
+        min-width: 24px;
+  
+        path {
+          stroke: $primary-color;
+        }
+      }
+  
+      .current-location {
+        @include typography($font-size-16, $regular-400, $primary-color);
+        width: 100%;
+        margin-left: $spacing-12;
+      }
+    }
+  
+    .current-date-container {
+      display: flex;
+      align-items: center;
+      margin: $spacing-0 $spacing-16 $spacing-14 $spacing-16;
+  
+      svg {
+        min-height: 24px;
+        min-width: 24px;
+  
+        path {
+          fill: $primary-color;
+        }
+      }
+      .current-date {
+        @include typography($font-size-16, $regular-400, $primary-color);
+        width: 100%;
+        margin-left: $spacing-12;
+      }
+    }
+  }
+  
+  .heading {
+    @include typography($font-size-28, $regular-400, $primary-color);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    margin: $spacing-40 auto $spacing-40 $spacing-0;
+  }
+  
+  .current-weather-details-left,
+.current-weather-details-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+
+  .wind-speed-card,
+  .pressure-card,
+  .sunrise-card,
+  .humidity-card,
+  .visibility-card,
+  .sunset-card {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: $spacing-16 $spacing-20;
+    border-radius: $border-radius;
+    background-color: $tertiary-color;
+
+    .wind-speed-icon,
+    .pressure-icon,
+    .sunrise-icon,
+    .humidity-icon,
+    .visibility-icon,
+    .sunset-icon {
+      height: 48px;
+      width: 48px;
+    }
+
+    .wind-speed-details,
+    .pressure-details,
+    .sunrise-details,
+    .humidity-details,
+    .visibility-details,
+    .sunset-details {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-left: $spacing-12;
+
+      .wind-speed-title,
+      .pressure-title,
+      .sunrise-title,
+      .humidity-title,
+      .visibility-title,
+      .sunset-title {
+        @include typography($font-size-16, $regular-400, $accent-color);
+        margin: $spacing-14 $spacing-16 $spacing-12 $spacing-16;
+      }
+
+      .wind-speed-value,
+      .pressure-value,
+      .sunrise-value,
+      .humidity-value,
+      .visibility-value,
+      .sunset-value {
+        @include typography($font-size-24, $regular-400, $primary-color);
+        margin: $spacing-0 $spacing-16 $spacing-14 $spacing-16;
+      }
+    }
+  }
+
+  .pressure-card,
+  .visibility-card {
+    margin: $spacing-16 $spacing-0;
+  }
+}
+
+.hourly-weather-forecast-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    padding: $spacing-16 $spacing-20;
+    border-radius: $border-radius;
+    background-color: $tertiary-color;
+  
+    .hourly-weather-forecast-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: $spacing-14 $spacing-16;
+  
+      .hourly-weather-forecast-date-time {
+        width: 100%;
+        margin-right: $spacing-12;
+  
+        .hourly-weather-forecast-date {
+          @include typography($font-size-14, $regular-400, $accent-color);
+          margin-bottom: $spacing-6;
+        }
+  
+        .hourly-weather-forecast-time {
+          @include typography($font-size-16, $regular-400, $primary-color);
+        }
+      }
+  
+      .hourly-weather-forecast-temperature {
+        @include typography($font-size-16, $medium-500, $primary-color);
+      }
+    }
+  }
+  

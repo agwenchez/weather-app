@@ -5,5 +5,13 @@
 @import 'base/typography.scss';
 @import 'base/animation.scss';
 
-@import 'components/weather.module.scss';
+
+@import 'layout/footer';
+@import 'layout/header';
+
+
+// @import 'components/current-weather.module.scss';
 @import 'components/app.module.scss';
+@import 'components/current.module.scss';
+@import 'components/search.module.scss';
+@import 'components/forecast.module.scss';
