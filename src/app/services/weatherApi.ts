@@ -1,32 +1,22 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-// import { prepareHeaders } from "../../utils";
-import { BASE_URL } from "../../constants";
+// import { BASE_URL } from "../../constants";
 
 export const weatherApi = createApi({
   reducerPath: "weatherApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
-    // prepareHeaders,
+    baseUrl: 'https://api.openweathermap.org/data/2.5/',
   }),
-  tagTypes: ['products'],
+  tagTypes: ['weather'],
   endpoints: (builder) => ({
-    getProducts: builder.query({
-      query: ({ campaign }) => ({
-        url: "products",
+    getCurrentWeatherReport: builder.query({
+      query: (params) => ({
+        url: "weather",
         method: "GET",
-        params: { campaign }
+        params
       }),
-      providesTags: ['products']
-    }),
-    addProduct: builder.mutation({
-      query: (body) => ({
-        url: "products/",
-        method: "POST",
-        body,
-      }),
-      invalidatesTags: ["products"],
+      providesTags: ['weather']
     }),
   }),
 });
 
-export const { useGetProductsQuery, useAddProductMutation } = weatherApi;
+export const { useGetCurrentWeatherReportQuery, useLazyGetCurrentWeatherReportQuery } = weatherApi;

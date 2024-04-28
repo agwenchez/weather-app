@@ -1,0 +1,38 @@
+
+
+.app_container{
+  background-color: white;
+  min-height: 100vh;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+}
+
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading_spinner {
+  width: 2rem;
+  height: 2rem;
+  border: 0.1rem solid #002cc4; 
+  border-top: 0.1rem solid white; 
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+}
+
+.loading_container, .error_container{
+  display: flex;
+  padding: 0em 10em;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5em;
+}
+
+.error_message{
+  color: red
+}
