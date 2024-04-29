@@ -2,10 +2,9 @@ import { formatTime12hr, formatUnixTimestamp } from "../../utils";
 
 interface CurrentWeatherProps {
   data: any;
-  // loading: boolean
 }
 
-const CurrentWeather = ({ data }: CurrentWeatherProps) => {
+const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
   // console.log("Data", data)
   // console.log("Loading", loading)
   return (
@@ -132,7 +131,7 @@ const CurrentWeather = ({ data }: CurrentWeatherProps) => {
             </div>
           </div>
         </div>
-        <div className="hourly-weather-forecast-section"></div>
+
       </div>
     </>
   );

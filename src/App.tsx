@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../src/scss/main.scss";
 import {
   useGetCurrentWeatherReportQuery,
   useGetForecastReportQuery,
   useLazyGetCurrentWeatherReportQuery,
+  useLazyGetForecastReportQuery,
+  useLazyGetHourlyReportQuery,
 } from "./app/services";
 // import SearchInput from "./components/Search";
 import Weather from "./components/Weather";
@@ -15,11 +17,14 @@ import Forecast from "./components/Forecast";
 import Header from "./components/Header";
 import CurrentWeather from "./components/CurrentWeather";
 import Footer from "./components/Footer";
+import { formatUnixTimestamp } from "./utils";
 
 function App() {
   const { coords } = useGeolocation();
 
   const [searchTerm, setSearchTerm] = useState<string>("");
+  const [filteredData, setFilteredData] = useState<string []>([])
+  const [uniqueDays, setUniqueDays] = useState<string[]>([]);
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -39,8 +44,9 @@ function App() {
   } = useGetCurrentWeatherReportQuery(params, { refetchOnReconnect: true });
   const [trigger, { data: searchResults, isLoading: isSearching }] =
     useLazyGetCurrentWeatherReportQuery();
+  const [forecast , { data: forecastSearchResults, isLoading: isSearchingForecast }] =
+    useLazyGetForecastReportQuery();
 
-  console.log("search results", searchResults);
   const {
     data: forecastReport,
     // isLoading: isForecastReportLoading,
@@ -54,7 +60,30 @@ function App() {
   const debouncedSearch = useDebounce((searchTerm) => {
     // console.log("Fetching data for", searchTerm);
     trigger({ q: searchTerm, ...params });
-  }, 1000);
+    forecast({ q: searchTerm, ...params });
+  }, 500);
+
+
+  useEffect(() => {
+    forecast({ q: searchTerm, ...params });
+    const days: Set<string> = new Set();
+    forecastSearchResults?.list?.forEach((item: { dt: number; }) => {
+        const formattedDay = formatUnixTimestamp(item.dt);
+        if (!days.has(formattedDay)) {
+            days.add(formattedDay);
+        }
+    });
+    setUniqueDays(Array.from(days));
+
+    // Filtering data for the first unique day
+    if (Array.from(days).length > 0) {
+        const firstDay = Array.from(days)[0];
+        const filtered = forecastSearchResults?.list?.filter((item: { dt: number; }) => formatUnixTimestamp(item.dt).includes(firstDay));
+        setFilteredData(filtered);
+    }
+}, [forecastSearchResults, forecast]);
+
+console.log('Filtered days', filteredData)
 
   return (
     <>
@@ -129,7 +158,7 @@ function App() {
         </div>
       </div>
       <CurrentWeather data={searchTerm ? searchResults : weatherReport} />
-      <Forecast/>
+      <Forecast data={searchTerm ? forecastSearchResults : forecastReport}/>
       <Footer/>
     </>
     // <div className="app_container">
