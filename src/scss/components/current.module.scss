@@ -126,6 +126,7 @@
       .humidity-title,
       .visibility-title,
       .sunset-title {
+        text-transform: capitalize;
         @include typography($font-size-16, $regular-400, $accent-color);
         margin: $spacing-14 $spacing-16 $spacing-12 $spacing-16;
       }

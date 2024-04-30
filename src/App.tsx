@@ -1,13 +1,19 @@
 import "../src/scss/main.scss";
 import { IntlProvider } from "react-intl";
 import WeatherApp from "./pages/WeatherApp";
-import translations from "../sw.json";
+import English from "./translations/en.json";
+import Swahili from "./translations/sw.json";
 import { useState } from "react";
 import LanguageSelector from "./components/LanguageSelector";
+// import { Translations } from "./@types";
 
 const App = () =>{
-  const messages = translations[locale];
-  const [locale, setLocale] = useState("en");
+  const [locale, setLocale] = useState<string>("en");
+  const messages: Record<string, any> = {
+    en: English,
+    sw: Swahili,
+  };
+
 
   const handleLanguageChange = (selectedLocale: string) => {
     setLocale(selectedLocale);
@@ -15,7 +21,7 @@ const App = () =>{
 
   return (
     <>
-      <IntlProvider locale={locale} messages={messages}>
+      <IntlProvider locale={locale} messages={messages[locale]}>
         <LanguageSelector onLanguageChange={handleLanguageChange} />
         <WeatherApp />
       </IntlProvider>

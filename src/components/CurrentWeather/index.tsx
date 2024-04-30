@@ -1,3 +1,4 @@
+import { FormattedMessage } from "react-intl";
 import { formatTime12hr, formatUnixTimestamp } from "../../utils";
 
 interface CurrentWeatherProps {
@@ -76,7 +77,9 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div className="wind-speed-card">
             <img src="/animated/wind-speed.svg" className="wind-speed-icon" />
             <div className="wind-speed-details">
-              <div className="wind-speed-title">Wind Speed</div>
+              <div className="wind-speed-title">
+              <FormattedMessage id="wind_speed"/>
+                </div>
               <div className={`${!data ? "loading wind-speed-value" : "wind-speed-value"}`}>
                 <p>{data && data?.wind?.speed} m/s</p>
               </div>
@@ -85,7 +88,9 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div className="pressure-card">
             <img src="/animated/pressure.svg" className="pressure-icon" />
             <div className="pressure-details">
-              <div className="pressure-title">Pressure</div>
+              <div className="pressure-title">
+              <FormattedMessage id="pressure" defaultMessage="Pressure" />
+              </div>
               <div className={`${!data ? "loading pressure-value" : "pressure-value"}`}>
                 {data?.main?.pressure} hPa
               </div>
@@ -94,7 +99,9 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div className="sunrise-card">
             <img src="/animated/sunrise.svg" className="sunrise-icon" />
             <div className="sunrise-details">
-              <div className="sunrise-title">Sunrise</div>
+              <div className="sunrise-title">
+              <FormattedMessage id="sunrise"/>
+                </div>
               <div className={`${!data ? "loading sunrise-value" : "sunrise-value"}`}>
                 {formatTime12hr(data?.sys?.sunrise)}
               </div>
@@ -105,7 +112,9 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div className="humidity-card">
             <img src="/animated/humidity.svg" className="humidity-icon" />
             <div className="humidity-details">
-              <div className="humidity-title">Humidity</div>
+              <div className="humidity-title">
+              <FormattedMessage id="humidity" />
+                </div>
               <div className={`${!data ? "loading humidity-value" : "humidity-value"}`}>
                 {data?.main?.humidity} %
               </div>
@@ -114,7 +123,9 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div className="visibility-card">
             <img src="/animated/visibility.svg" className="visibility-icon" />
             <div className="visibility-details">
-              <div className="visibility-title">Visibility</div>
+              <div className="visibility-title">
+              <FormattedMessage id="visibility" />
+                </div>
               <div className={`${!data ? "loading visibility-value" : "visibility-value"}`}>
                 {data?.visibility} m
               </div>
@@ -123,9 +134,10 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div className="sunset-card">
             <img src="/animated/sunset.svg" className="sunset-icon" />
             <div className="sunset-details">
-              <div className="sunset-title">Sunset</div>
+              <div className="sunset-title">
+              <FormattedMessage id="sunset" />
+              </div>
               <div className={`${!data ? "loading sunset-value" : "sunset-value"}`}>
-                {" "}
                 {formatTime12hr(data?.sys?.sunset)}
               </div>
             </div>
