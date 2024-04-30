@@ -1,8 +1,9 @@
 import { FormattedMessage } from "react-intl";
 import { formatTime12hr, formatUnixTimestamp } from "../../utils";
+import { WeatherData } from "../../@types";
 
 interface CurrentWeatherProps {
-  data: any;
+  data: WeatherData;
 }
 
 const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
@@ -10,7 +11,9 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
   // console.log("Loading", loading)
   return (
     <>
-      <div className="heading">Today Overview</div>
+      <div className="heading">
+      <FormattedMessage id="today overview"/>
+        </div>
       <div className="current-weather-section">
         <div className="current-weather-card">
           <img
@@ -25,7 +28,7 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
           <div
             className={`${!data ? "loading current-weather-description" : "current-weather-description"}`}
           >
-            <p>{data?.weather[0]?.description}</p>
+            <p><FormattedMessage id={`weather.${data?.weather[0]?.description}`} defaultMessage={data?.weather[0]?.description} /></p>
           </div>
           <div className="divider"></div>
           <div className="current-location-container">
@@ -78,7 +81,7 @@ const CurrentWeather = ({ data, }: CurrentWeatherProps) => {
             <img src="/animated/wind-speed.svg" className="wind-speed-icon" />
             <div className="wind-speed-details">
               <div className="wind-speed-title">
-              <FormattedMessage id="wind_speed"/>
+              <FormattedMessage id="wind speed"/>
                 </div>
               <div className={`${!data ? "loading wind-speed-value" : "wind-speed-value"}`}>
                 <p>{data && data?.wind?.speed} m/s</p>

@@ -1,5 +1,3 @@
-import { monthsOfYear } from "../constants";
-
 export const formatUnixTimestamp = (timestamp: number): string => {
   // Convert UNIX timestamp to milliseconds
   const milliseconds = timestamp * 1000;

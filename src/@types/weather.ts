@@ -6,6 +6,7 @@ export interface ForecastData {
     city:    City;
 }
 
+
 export interface City {
     id:         number;
     name:       string;
@@ -21,6 +22,26 @@ export interface Coord {
     lat: number;
     lon: number;
 }
+export interface WeatherData {
+    coord:      Coord;
+    weather:    Weather[];
+    base:       string;
+    main:       Main;
+    visibility: number;
+    wind:       Wind;
+    rain:       Rain;
+    clouds:     Clouds;
+    dt:         number;
+    sys:        WeatherSys;
+    timezone:   number;
+    id:         number;
+    name:       string;
+    cod:        number;
+}
+
+export interface Clouds {
+    all: number;
+}
 
 export interface List {
     dt:         number;
@@ -35,11 +56,19 @@ export interface List {
     dt_txt:     Date;
 }
 
+export interface WeatherSys {
+    type:    number;
+    id:      number;
+    country: string;
+    sunrise: number;
+    sunset:  number;
+}
 export interface Clouds {
     all: number;
 }
 
-export interface MainClass {
+export interface Main{
+
     temp:       number;
     feels_like: number;
     temp_min:   number;
@@ -48,6 +77,8 @@ export interface MainClass {
     sea_level:  number;
     grnd_level: number;
     humidity:   number;
+}
+export interface MainClass extends Main {
     temp_kf:    number;
 }
 

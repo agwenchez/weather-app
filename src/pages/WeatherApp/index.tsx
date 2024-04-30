@@ -45,6 +45,7 @@ const WeatherApp = () => {
     trigger({ q: searchTerm, ...params });
     forecast({ q: searchTerm, ...params });
   }, 500);
+  console.log('search', searchResults)
 
   return (
     <>
