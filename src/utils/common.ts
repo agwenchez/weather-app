@@ -13,7 +13,7 @@ export const formatUnixTimestamp = (timestamp: number): string => {
   const year: number = date.getFullYear();
 
   // Construct the formatted date string
-  const formattedDate: string = `${day} ${month} ${year}`;
+  const formattedDate = `${day} ${month} ${year}`;
 
   return formattedDate;
 };
@@ -35,7 +35,7 @@ export const formatTime12hr = (timestamp: number): string => {
   hours = hours ? hours : 12; // Handle midnight (0 hours)
 
   // Construct the formatted time string
-  const formattedTime: string = `${hours}:${minutes
+  const formattedTime = `${hours}:${minutes
     .toString()
     .padStart(2, "0")} ${period}`;
 

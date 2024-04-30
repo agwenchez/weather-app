@@ -1,24 +1,3 @@
-// import { useCallback } from "react";
-
-// const useDebounce = <T extends (...args: any[]) => void>(
-//   callback: T,
-//   delay: number
-// ): T => {
-//   const debounceCallback = useCallback(
-//     (...args: Parameters<T>) => {
-//       const later = () => callback(...args);
-//       clearTimeout(window.debounceTimer);
-//       window.debounceTimer = setTimeout(later, delay);
-//     },
-//     [callback, delay]
-//   ) as T;
-
-//   return debounceCallback;
-// };
-
-// export default useDebounce;
-
-
 import { useEffect, useRef, useCallback } from 'react';
 
 const useDebounce = <T extends (...args: any[]) => void>(
@@ -53,4 +32,3 @@ const useDebounce = <T extends (...args: any[]) => void>(
 };
 
 export default useDebounce;
-;

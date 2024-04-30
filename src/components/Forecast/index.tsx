@@ -10,6 +10,7 @@ const Forecast = ({ data }: ForecastProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [filterItem, setFilterItem] = useState<string>("");
   const [uniqueDays, setUniqueDays] = useState<string[]>([]);
+  console.log("Data", data)
 
   useEffect(() => {
     const days: Set<string> = new Set();
@@ -54,7 +55,7 @@ const Forecast = ({ data }: ForecastProps) => {
             <div
               className={`${
                 !data
-                  ? "daily-weather-card loading"
+                  ? "loading daily-weather-card"
                   : "daily-weather-forecast-card"
               }`}
             >
@@ -62,7 +63,7 @@ const Forecast = ({ data }: ForecastProps) => {
                 <div
                   className={`${
                     !data
-                      ? "daily-weather-forecast-date loading"
+                      ? "loading daily-weather-forecast-date"
                       : "daily-weather-forecast-date"
                   }`}
                 >
@@ -71,7 +72,7 @@ const Forecast = ({ data }: ForecastProps) => {
                 <div
                   className={`${
                     !data
-                      ? "daily-weather-forecast-time loading"
+                      ? "loading daily-weather-forecast-time"
                       : "daily-weather-forecast-time"
                   }`}
                 >
@@ -83,21 +84,21 @@ const Forecast = ({ data }: ForecastProps) => {
                 alt="day_icon"
                 className={`${
                   !data
-                    ? "daily-weather-forecast-icon loading"
+                    ? "loading daily-weather-forecast-icon"
                     : "daily-weather-forecast-icon"
                 }`}
               />
               <div
                 className={`${
                   !data
-                    ? "daily-forecast-weather-details loading"
+                    ? "loading daily-forecast-weather-details"
                     : "daily-forecast-weather-details"
                 }`}
               >
                 <div
                   className={`${
                     !data
-                      ? "daily-weather-forecast-temperature loading"
+                      ? "loading daily-weather-forecast-temperature"
                       : "daily-weather-forecast-temperature"
                   }`}
                 >
@@ -106,7 +107,7 @@ const Forecast = ({ data }: ForecastProps) => {
                 <div
                   className={`${
                     !data
-                      ? "daily-weather-forecast-description loading"
+                      ? "loading daily-weather-forecast-description"
                       : "daily-weather-forecast-description"
                   }`}
                 >
