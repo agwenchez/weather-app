@@ -10,7 +10,6 @@ const Forecast = ({ data }: ForecastProps) => {
   const [activeIndex, setActiveIndex] = useState<number>(0);
   const [filterItem, setFilterItem] = useState<string>("");
   const [uniqueDays, setUniqueDays] = useState<string[]>([]);
-  console.log("Data", data)
 
   useEffect(() => {
     const days: Set<string> = new Set();
@@ -63,7 +62,7 @@ const Forecast = ({ data }: ForecastProps) => {
                 <div
                   className={`${
                     !data
-                      ? "loading daily-weather-forecast-date"
+                      ? "loading"
                       : "daily-weather-forecast-date"
                   }`}
                 >
@@ -72,7 +71,7 @@ const Forecast = ({ data }: ForecastProps) => {
                 <div
                   className={`${
                     !data
-                      ? "loading daily-weather-forecast-time"
+                      ? "loading "
                       : "daily-weather-forecast-time"
                   }`}
                 >
@@ -84,14 +83,14 @@ const Forecast = ({ data }: ForecastProps) => {
                 alt="day_icon"
                 className={`${
                   !data
-                    ? "loading daily-weather-forecast-icon"
+                    ? "loading "
                     : "daily-weather-forecast-icon"
                 }`}
               />
               <div
                 className={`${
                   !data
-                    ? "loading daily-forecast-weather-details"
+                    ? "loading"
                     : "daily-forecast-weather-details"
                 }`}
               >

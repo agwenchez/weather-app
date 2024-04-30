@@ -24,14 +24,6 @@ export const weatherApi = createApi({
       }),
       providesTags: ["weather"],
     }),
-    getHourlyReport: builder.query({
-      query: (params) => ({
-        url: "forecast/hourly",
-        method: "GET",
-        params,
-      }),
-      providesTags: ["weather"],
-    }),
   }),
 });
 
@@ -40,6 +32,4 @@ export const {
   useGetForecastReportQuery,
   useLazyGetCurrentWeatherReportQuery,
   useLazyGetForecastReportQuery,
-  useGetHourlyReportQuery,
-  useLazyGetHourlyReportQuery
 } = weatherApi;

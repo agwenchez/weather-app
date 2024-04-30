@@ -1,5 +1,10 @@
 import { useState, useMemo } from "react";
-import { useGetCurrentWeatherReportQuery, useLazyGetCurrentWeatherReportQuery, useLazyGetForecastReportQuery, useGetForecastReportQuery } from "../../app/services";
+import {
+  useGetCurrentWeatherReportQuery,
+  useLazyGetCurrentWeatherReportQuery,
+  useLazyGetForecastReportQuery,
+  useGetForecastReportQuery,
+} from "../../app/services";
 import CurrentWeather from "../../components/CurrentWeather";
 import Footer from "../../components/Footer";
 import Forecast from "../../components/Forecast";
@@ -7,20 +12,20 @@ import useDebounce from "../../hooks/useDebounce";
 import useGeolocation from "../../hooks/useGeolocation";
 
 const WeatherApp = () => {
-    const { coords } = useGeolocation();
   const [searchTerm, setSearchTerm] = useState<string>("");
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setSearchTerm(value);
   };
-  const params = useMemo(()=>{
+  const { coords } = useGeolocation();
+  const params = useMemo(() => {
     return {
       lat: coords.latitude,
       lon: coords.longitude,
       units: "metric",
       APPID: "ab32a51da647d27bbd2ace7810f2a664",
     };
-  },[coords.latitude, coords.longitude])
+  }, [coords.latitude, coords.longitude]);
   const {
     data: weatherReport,
     // isLoading: isWeatherReportLoading,
@@ -29,8 +34,10 @@ const WeatherApp = () => {
   } = useGetCurrentWeatherReportQuery(params, { refetchOnReconnect: true });
   const [trigger, { data: searchResults, isLoading: isSearching }] =
     useLazyGetCurrentWeatherReportQuery();
-  const [forecast , { data: forecastSearchResults, isLoading: isSearchingForecast }] =
-    useLazyGetForecastReportQuery();
+  const [
+    forecast,
+    { data: forecastSearchResults, isLoading: isSearchingForecast },
+  ] = useLazyGetForecastReportQuery();
 
   const {
     data: forecastReport,
@@ -39,13 +46,12 @@ const WeatherApp = () => {
     // isFetching: isForecastReportFetching,
   } = useGetForecastReportQuery(params);
 
-
   const debouncedSearch = useDebounce((searchTerm) => {
     // console.log("Fetching data for", searchTerm);
     trigger({ q: searchTerm, ...params });
     forecast({ q: searchTerm, ...params });
   }, 500);
-  console.log('search', searchResults)
+  console.log("search", searchResults);
 
   return (
     <>
@@ -120,10 +126,10 @@ const WeatherApp = () => {
         </div>
       </div>
       <CurrentWeather data={searchTerm ? searchResults : weatherReport} />
-      <Forecast data={searchTerm ? forecastSearchResults : forecastReport}/>
-      <Footer/>
+      <Forecast data={searchTerm ? forecastSearchResults : forecastReport} />
+      <Footer />
     </>
-  )
-}
+  );
+};
 
-export default WeatherApp
+export default WeatherApp;
