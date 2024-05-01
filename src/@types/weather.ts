@@ -43,6 +43,14 @@ export interface Clouds {
     all: number;
 }
 
+export interface ForecastRequest{
+    lat: number | null,
+    lon: number | null,
+    units: string,
+    APPID: string,
+    q?: string
+}
+
 export interface List {
     dt:         number;
     main:       MainClass;

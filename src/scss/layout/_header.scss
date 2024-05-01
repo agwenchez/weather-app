@@ -53,9 +53,9 @@
       }
   
       & > *:nth-last-child(2) {
-        width: 56px;
+        // width: 56px;
         flex-shrink: 0;
-        margin-right: $spacing-0;
+        margin-left: $spacing-0;
       }
     }
   }

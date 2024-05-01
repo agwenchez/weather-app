@@ -1,6 +1,6 @@
 import { FormattedMessage } from "react-intl";
-import { formatTime12hr, formatUnixTimestamp } from "../../utils";
-import { WeatherData } from "../../@types";
+import { formatDate, formatTime12hr, formatUnixTimestamp } from "../../utils";
+import { List, WeatherData } from "../../@types";
 import { useState, useEffect, useMemo } from "react";
 import { useGetForecastReportQuery } from "../../app/services";
 import useGeolocation from "../../hooks/useGeolocation";
@@ -19,21 +19,31 @@ const CurrentWeather = ({ data }: CurrentWeatherProps) => {
       APPID: "ab32a51da647d27bbd2ace7810f2a664",
     };
   }, [coords.latitude, coords.longitude]);
-  const [uniqueDays, setUniqueDays] = useState<string[]>([]);
-  const { data: weatherForecast } = useGetForecastReportQuery(params);
+  // const [uniqueDays, setUniqueDays] = useState<string[]>([]);
+  const { data: weatherForecast, isLoading } = useGetForecastReportQuery(params);
 
-  useEffect(() => {
-    const days: Set<string> = new Set();
-    weatherForecast?.list?.forEach((item: WeatherData) => {
-      const formattedDay = formatUnixTimestamp(item.dt);
-      if (!days.has(formattedDay)) {
-        days.add(formattedDay);
-      }
-    });
-    setUniqueDays(Array.from(days));
-  }, [data, weatherForecast?.list]);
-  console.log("Unique days", uniqueDays)
-  console.log("Forecast", weatherForecast)
+  // useEffect(() => {
+  //   const days: Set<string> = new Set();
+  //   weatherForecast?.list?.forEach((item: List) => {
+  //     const formattedDay = formatUnixTimestamp(item.dt);
+  //     if (!days.has(formattedDay)) {
+  //       days.add(formattedDay);
+  //     }
+  //   });
+  //   setUniqueDays(Array.from(days));
+  // }, [data, weatherForecast?.list]);
+
+  // const hourlyData = weatherForecast?.list?.filter((item) => {
+  //   // console.log("Formatted date",formatUnixTimestamp(item.dt) )
+  //   formatUnixTimestamp(item.dt) === uniqueDays[0];
+  // });
+  weatherForecast?.list?.slice(0, 5).forEach((item) => {
+    console.log("Formatted date", formatUnixTimestamp(item.dt));
+  });
+  const hourlyData = weatherForecast?.list?.slice(0,6)
+  console.log("Hourly forecast", weatherForecast?.list?.slice(0, 5));
+  // console.log("Unique days", uniqueDays[0]);
+  // console.log("Hourly", hourlyData)
   return (
     <>
       <div className="heading">
@@ -214,9 +224,28 @@ const CurrentWeather = ({ data }: CurrentWeatherProps) => {
             </div>
           </div>
         </div>
-        <div className="hourly-weather-forecast-section"></div>
+
+        <div className="hourly-weather-forecast-section">
+          {hourlyData && hourlyData.map((item)=>(
+            <div key={item.dt} className="hourly-weather-forecast-card">
+            <div  className={`${isLoading || !weatherForecast ? "loading hourly-weather-forecast-date-time" : "hourly-weather-forecast-date-time"}`} >
+              <div className="hourly-weather-forecast-date">
+                {formatDate(item.dt, 'day')}
+              </div>
+              <div className="hourly-weather-forecast-time">
+              {formatDate(item.dt, 'hour')}
+              </div>
+            </div>
+            <div className="hourly-weather-forecast-temperature">
+            {Math.round(item?.main?.temp)}°C
+            </div>
+          </div>
+          )
+          )}
+        </div>
       </div>
     </>
+                    
   );
 };
 

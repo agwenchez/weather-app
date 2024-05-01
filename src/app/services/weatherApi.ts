@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { ForecastData, ForecastRequest } from "../../@types";
 // import { BASE_URL } from "../../constants";
 
 export const weatherApi = createApi({
@@ -16,7 +17,7 @@ export const weatherApi = createApi({
       }),
       providesTags: ["weather"],
     }),
-    getForecastReport: builder.query({
+    getForecastReport: builder.query<ForecastData, ForecastRequest>({
       query: (params) => ({
         url: "forecast",
         method: "GET",

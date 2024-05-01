@@ -3,7 +3,7 @@ import { ForecastData } from "../../@types";
 import { formatTime12hr, formatUnixTimestamp } from "../../utils";
 
 interface ForecastProps {
-  data: ForecastData;
+  data: ForecastData | undefined;
 }
 
 const Forecast = ({ data }: ForecastProps) => {

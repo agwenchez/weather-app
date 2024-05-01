@@ -1,3 +1,5 @@
+import { monthsOfYear, daysOfWeek } from "../constants";
+
 export const formatUnixTimestamp = (timestamp: number): string => {
   // Convert UNIX timestamp to milliseconds
   const milliseconds = timestamp * 1000;
@@ -38,4 +40,30 @@ export const formatTime12hr = (timestamp: number): string => {
     .padStart(2, "0")} ${period}`;
 
   return formattedTime;
+};
+
+export const formatDate = (unixTimestamp: number, type: string): string => {
+
+  const daysOfWeekShortened = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  const monthsOfYearShortened = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+  const date = new Date(unixTimestamp * 1000);
+  const dayOfMonth = date.getDate();
+  const monthIndex = date.getMonth();
+  const dayOfWeekIndex = date.getDay();
+  const hours = date.getHours().toString().padStart(2, "0");
+  const minutes = date.getMinutes().toString().padStart(2, "0");
+
+  const formattedDate = `${dayOfMonth} ${monthsOfYear[monthIndex]} ${daysOfWeek[dayOfWeekIndex]}`;
+  const formattedDateShortened = `${dayOfMonth} ${monthsOfYearShortened[monthIndex]} ${daysOfWeekShortened[dayOfWeekIndex]}`;
+
+  if (type === "day") {
+    return daysOfWeek[dayOfWeekIndex];
+  } else if (type === "hour") {
+    return `${hours}:${minutes}`;
+  } else if (type === "short") {
+    return formattedDateShortened;
+  } else {
+    return formattedDate;
+  }
 };

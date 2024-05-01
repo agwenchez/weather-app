@@ -1,7 +1,14 @@
 .locale-selector{
-    padding: 1.2em;
+    padding: 1em;
     border-radius: .25em;
     position: absolute;
     right: 12em;
-    min-width: 10em;
+    min-width: 4em;
 }
+
+@include media-query("small") {
+    .locale-selector{
+        right: 3.5em;
+        top: 1.5em;
+    }
+  }
