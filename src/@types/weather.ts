@@ -47,7 +47,7 @@ export interface ForecastRequest{
     lat: number | null,
     lon: number | null,
     units: string,
-    APPID: string,
+    APPID: string | null,
     q?: string
 }
 

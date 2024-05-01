@@ -1,6 +1,6 @@
 import { useEffect, useRef, useCallback } from 'react';
 
-const useDebounce = <T extends (...args: any[]) => void>(
+const useDebounce = <T extends (...args: string[]) => void>(
   callback: T,
   delay: number
 ): T => {

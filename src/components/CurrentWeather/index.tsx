@@ -1,7 +1,7 @@
 import { FormattedMessage } from "react-intl";
 import { formatDate, formatTime12hr, formatUnixTimestamp } from "../../utils";
-import { List, WeatherData } from "../../@types";
-import { useState, useEffect, useMemo } from "react";
+import { WeatherData } from "../../@types";
+import { useMemo } from "react";
 import { useGetForecastReportQuery } from "../../app/services";
 import useGeolocation from "../../hooks/useGeolocation";
 

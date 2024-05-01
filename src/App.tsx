@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import "../src/scss/main.scss";
 import { IntlProvider } from "react-intl";
 import WeatherApp from "./pages/WeatherApp";
